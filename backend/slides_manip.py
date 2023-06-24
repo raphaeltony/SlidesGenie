@@ -1,44 +1,12 @@
 from __future__ import print_function
 
-import os.path
-
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-
-# Setting up the authentication:
-SCOPES = ['https://www.googleapis.com/auth/presentations', 'https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/drive.file']
-
-creds = None
-# The file token.json stores the user's access and refresh tokens, and is
-# created automatically when the authorization flow completes for the first
-# time.
-if os.path.exists('token.json'):
-    creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-# If there are no (valid) credentials available, let the user log in.
-if not creds or not creds.valid:
-    if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-    else:
-        flow = InstalledAppFlow.from_client_secrets_file(
-            'credentials.json', SCOPES)
-        creds = flow.run_local_server(port=0)
-    # Save the credentials for the next run
-    with open('token.json', 'w') as token:
-        token.write(creds.to_json())
+from backend.connection import get_drive_service
+from backend.connection import get_slides_service
 
 #Connecting to the drive service
-try:
-    drive_service = build('drive', 'v3', credentials=creds)
-
-except HttpError as error:
-    print(f"An error occurred: {error}")
-    print("Presentations  not copied")
-
-
-
+drive_service = get_drive_service()
+slides_service = get_slides_service()
 
 def copy_presentation(presentation_id, copy_title):
     """
@@ -62,5 +30,46 @@ def copy_presentation(presentation_id, copy_title):
 
     return presentation_copy_id
 
-new_id = copy_presentation("1Qw0oqIpGSrEyQZkFhFnzxj6-4kMq8X1TnSdqpG94Ch8","My presentation")
-print(new_id)
+# new_id = copy_presentation("1Qw0oqIpGSrEyQZkFhFnzxj6-4kMq8X1TnSdqpG94Ch8","My presentation")
+# print(new_id)
+
+def create_slide_copy(presentation_id,slides,slide_type,counter):
+    if slide_type == 'title':
+        pageId = slides[0]['objectId']
+    elif slide_type == 'left-image-text':
+        pageId = slides[1]['objectId']
+    elif slide_type == 'right-image-text':
+        pageId = slides[2]['objectId']
+    elif slide_type == 'title-sub-text':
+        pageId = slides[3]['objectId']
+
+    requests = {
+    "requests" : [
+    {
+      "duplicateObject": {
+        "objectId": pageId,
+        "objectIds": {
+          pageId: "copiedSlide" + str(counter),
+        }
+      }
+    }
+    ]
+    }
+
+    try:
+        response = slides_service.presentations() \
+            .batchUpdate(presentationId=presentation_id, body=requests).execute()
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        print("Slide not copied")
+        return error
+    
+    
+def get_presentation(presentation_id):
+    presentation = slides_service.presentations().get(presentationId=presentation_id).execute()
+    slides = presentation.get('slides')
+    print(slides)
+    return slides
+
+
