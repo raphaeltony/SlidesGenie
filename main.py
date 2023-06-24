@@ -3,9 +3,6 @@ from flask import Flask
 from backend.slides_manip import copy_presentation
 from backend.slides_manip import get_presentation
 from backend.slides_manip import create_slide_copy
-
-from backend.connection import verify_credentials
-from backend.connection import build_services
 from backend.slides_creation import create_title_slide
 app = Flask(__name__)
 
@@ -19,8 +16,6 @@ def hello_world():
 
 @app.route("/submit")
 def process_input():
-    verify_credentials()
-    build_services()
     
     new_presentation_id = copy_presentation("1Qw0oqIpGSrEyQZkFhFnzxj6-4kMq8X1TnSdqpG94Ch8",response['slides'][0]['inputs']['title'])
     new_slides = get_presentation(new_presentation_id)
@@ -31,7 +26,7 @@ def process_input():
         create_slide_copy(new_presentation_id,new_slides,slide['type_id'],counter)
 
         if(slide['type_id'] == 'title'):
-            create_title_slide(new_presentation_id,slide['inputs'])
+            create_title_slide(new_presentation_id,slide['inputs'],counter)
 
         # elif(slide['type_id'] == 'left-image-text'):
         #     create_left_image(new_presentation_id,slide['inputs'])
@@ -43,6 +38,7 @@ def process_input():
         #     create_title_sub_text_slide(new_presentation_id,slide['inputs'])
 
         counter = counter + 1
+    return "Presentation created succesfully"
 
 
 

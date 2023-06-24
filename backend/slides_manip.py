@@ -49,7 +49,7 @@ def create_slide_copy(presentation_id,slides,slide_type,counter):
       "duplicateObject": {
         "objectId": pageId,
         "objectIds": {
-          "pageId": "copiedSlide" + counter,
+          pageId: "copiedSlide" + str(counter),
         }
       }
     }
@@ -62,7 +62,7 @@ def create_slide_copy(presentation_id,slides,slide_type,counter):
 
     except HttpError as error:
         print(f"An error occurred: {error}")
-        print("Presentations  not copied")
+        print("Slide not copied")
         return error
     
     

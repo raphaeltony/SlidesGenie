@@ -6,11 +6,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-credentials = None
-drive_service = None
-slides_service = None
-
-def verify_credentials():
+def get_creds():
     # Setting up the authentication:
     SCOPES = ['https://www.googleapis.com/auth/presentations', 'https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/drive.file']
     creds = None
@@ -30,28 +26,21 @@ def verify_credentials():
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
-    credentials = creds
-
-def get_creds():
-    return credentials
-
-def build_services():
-    try:
-        service1 = build('drive', 'v3', credentials=get_creds())
-        service2 = build('slides', 'v1', credentials=get_creds())
-
-
-    except HttpError as error:
-        print(f"An error occurred: {error}")
-        print("Presentations  not copied")
-
-    drive_service = service1
-    slides_service = service2
+    return creds
     
 
 def get_slides_service():
+    try:
+        slides_service = build('slides', 'v1', credentials=get_creds())
+    except HttpError as error:
+        print(f"An error occurred: {error}")
     return slides_service
 
 def get_drive_service():
+    try:
+        drive_service = build('drive', 'v3', credentials=get_creds())
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")
     return drive_service
             

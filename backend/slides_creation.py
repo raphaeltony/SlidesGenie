@@ -10,7 +10,7 @@ drive_service = get_drive_service()
 slides_service = get_slides_service()
 
 
-def create_title_slide(presentaion_id, content):
+def create_title_slide(presentaion_id, content,counter):
     requests = [
             {
                 'replaceAllText': {
@@ -18,7 +18,8 @@ def create_title_slide(presentaion_id, content):
                         'text': '<<title>>',
                         'matchCase': True
                     },
-                    'replaceText': content['title']
+                    'replaceText': content['title'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
                 }
             }
         ]
