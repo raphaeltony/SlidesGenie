@@ -10,7 +10,7 @@ drive_service = get_drive_service()
 slides_service = get_slides_service()
 
 
-def create_title_slide(presentaion_id, content,counter):
+def create_title_slide(presentation_id, content,counter):
     requests = [
             {
                 'replaceAllText': {
@@ -29,4 +29,48 @@ def create_title_slide(presentaion_id, content,counter):
         'requests': requests
     }
     response = slides_service.presentations().batchUpdate(
-        presentationId=presentaion_id, body=body).execute()
+        presentationId=presentation_id, body=body).execute()
+
+
+def create_title_sub_text_slide(presentation_id, content,counter):
+    requests = [
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<title-sub-text_title>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['title'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+
+            {
+                     'replaceAllText': {
+                    'containsText': {
+                        'text': '<<title-sub-text_sub>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['subtitle'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<title-sub-text_body>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['body'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            }
+        ]
+
+    # Execute the requests for this presentation.
+    body = {
+        'requests': requests
+    }
+    response = slides_service.presentations().batchUpdate(
+        presentationId=presentation_id, body=body).execute()
