@@ -54,8 +54,20 @@ def create_left_image_slide(presentation_id, content,counter):
                     'replaceText': content['body'],
                     'pageObjectIds':[f'copiedSlide{counter}']
                 }
+            },
+    
+            {
+                'replaceAllShapesWithImage': {
+                    'imageUrl': "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638892314/EducationHub/photos/tennessee-power-plant.jpg",
+                    'replaceMethod': 'CENTER_INSIDE',
+                    'containsText': {
+                        'text': '<<left-image-text_image>>',
+                        'matchCase': True
+                    },
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
             }
-        ]
+    ]
     
     body = {
         'requests': requests
