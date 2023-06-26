@@ -32,6 +32,38 @@ def create_title_slide(presentation_id, content,counter):
         presentationId=presentation_id, body=body).execute()
 
 
+def create_left_image_slide(presentation_id, content,counter):
+    requests = [
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<left-image-text_title>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['title'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<left-image-text_body>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['body'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            }
+        ]
+    
+    body = {
+        'requests': requests
+    }
+    response = slides_service.presentations().batchUpdate(
+        presentationId=presentation_id, body=body).execute()
+
+
 def create_title_sub_text_slide(presentation_id, content,counter):
     requests = [
             {
