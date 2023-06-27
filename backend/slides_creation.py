@@ -4,6 +4,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from backend.connection import get_drive_service
 from backend.connection import get_slides_service
+from backend.image_engine import image_generation
 
 #Connecting to the drive service
 drive_service = get_drive_service()
@@ -58,7 +59,7 @@ def create_left_image_slide(presentation_id, content,counter):
     
             {
                 'replaceAllShapesWithImage': {
-                    'imageUrl': "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638892314/EducationHub/photos/tennessee-power-plant.jpg",
+                    'imageUrl': image_generation(content['image_prompt']),
                     'replaceMethod': 'CENTER_INSIDE',
                     'containsText': {
                         'text': '<<left-image-text_image>>',
@@ -101,7 +102,7 @@ def create_right_image_slide(presentation_id, content,counter):
     
             {
                 'replaceAllShapesWithImage': {
-                    'imageUrl': "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638892314/EducationHub/photos/tennessee-power-plant.jpg",
+                    'imageUrl': image_generation(content['image_prompt']),
                     'replaceMethod': 'CENTER_INSIDE',
                     'containsText': {
                         'text': '<<right-image-text_image>>',
