@@ -3,7 +3,7 @@ from flask import Flask
 from backend.slides_manip import copy_presentation
 from backend.slides_manip import get_presentation
 from backend.slides_manip import create_slide_copy
-from backend.slides_creation import create_title_slide,create_left_image_slide, create_title_sub_text_slide
+from backend.slides_creation import create_title_slide,create_left_image_slide,create_right_image_slide, create_title_sub_text_slide
 app = Flask(__name__)
 
 response = {'slides': 
@@ -31,8 +31,8 @@ def process_input():
         elif(slide['type_id'] == 'left-image-text'):
             create_left_image_slide(new_presentation_id,slide['inputs'], counter)
 
-        # elif(slide['type_id'] == 'right-image-text'):
-        #     create_right_image(new_presentation_id,slide['inputs'], counter)
+        elif(slide['type_id'] == 'right-image-text'):
+            create_right_image_slide(new_presentation_id,slide['inputs'], counter)
 
         elif(slide['type_id'] == 'title-sub-text'):
             create_title_sub_text_slide(new_presentation_id,slide['inputs'], counter)
