@@ -4,6 +4,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from backend.connection import get_drive_service
 from backend.connection import get_slides_service
+from backend.image_engine import image_generation
 
 #Connecting to the drive service
 drive_service = get_drive_service()
@@ -30,6 +31,94 @@ def create_title_slide(presentation_id, content,counter):
     }
     response = slides_service.presentations().batchUpdate(
         presentationId=presentation_id, body=body).execute()
+
+
+def create_left_image_slide(presentation_id, content,counter):
+    requests = [
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<left-image-text_title>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['title'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<left-image-text_body>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['body'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+    
+            {
+                'replaceAllShapesWithImage': {
+                    'imageUrl': image_generation(content['image_prompt']),
+                    'replaceMethod': 'CENTER_INSIDE',
+                    'containsText': {
+                        'text': '<<left-image-text_image>>',
+                        'matchCase': True
+                    },
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            }
+    ]
+    
+    body = {
+        'requests': requests
+    }
+    response = slides_service.presentations().batchUpdate(
+        presentationId=presentation_id, body=body).execute()
+    
+def create_right_image_slide(presentation_id, content,counter):
+    requests = [
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<right-image-text_title>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['title'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<right-image-text_body>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['body'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+    
+            {
+                'replaceAllShapesWithImage': {
+                    'imageUrl': image_generation(content['image_prompt']),
+                    'replaceMethod': 'CENTER_INSIDE',
+                    'containsText': {
+                        'text': '<<right-image-text_image>>',
+                        'matchCase': True
+                    },
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            }
+    ]
+    
+    body = {
+        'requests': requests
+    }
+    response = slides_service.presentations().batchUpdate(
+        presentationId=presentation_id, body=body).execute()
+
 
 
 def create_title_sub_text_slide(presentation_id, content,counter):
