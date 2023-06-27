@@ -67,21 +67,21 @@ The above JSON contains a list of the 4 slide templates: title, left-image-text,
 RESPOND WITH JSON ONLY
 
 '''
+def content_generation(user_input):
+  user_input = "user input : "+ user_input
 
-user_input = "user input : Global Warming"
-
-response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
-            {"role": "system", "content": prompt},
-            {"role": "user", "content": user_input},
-        ]
-)
-
-
+  response = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages=[
+              {"role": "system", "content": prompt},
+              {"role": "user", "content": user_input},
+          ]
+  )
 
 # print(response["choices"][0]["message"]["content"])
 
-d = json.loads(response["choices"][0]["message"]["content"]) 
-print(d)
+  d = json.loads(response["choices"][0]["message"]["content"]) 
+  print(d)
+
+  return d
 
