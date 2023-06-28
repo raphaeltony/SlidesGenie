@@ -72,4 +72,48 @@ def get_presentation(presentation_id):
     print(slides)
     return slides
 
+def delete_template_slides(presentation_id, slides):
+    requests = {"requests":[]}
+    for slide in slides:
+        requests["requests"].append(
+            {
+            "deleteObject": {
+                "objectId": slide["objectId"],
+                }
+            }
+        )
+
+    try:
+        response = slides_service.presentations() \
+            .batchUpdate(presentationId=presentation_id, body=requests).execute()
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        print("Template slides deleted")
+        return error
+    
+def reorder_slides(presentation_id, counter):
+    requests = {"requests":[]}
+    for i in range(counter-1,-1,-1):
+        requests["requests"].append(
+            {
+                "updateSlidesPosition": {
+                "slideObjectIds": [
+                    f"copiedSlide{i}"
+                ],
+        "insertionIndex": 0
+                }
+            }
+        )
+
+    try:
+        response = slides_service.presentations() \
+            .batchUpdate(presentationId=presentation_id, body=requests).execute()
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        print("Error reordering")
+        return error
+
+
 
