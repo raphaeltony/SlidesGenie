@@ -14,8 +14,10 @@
     
 
     
+<link href="{{ url_for('static', filename='product.css')}}" rel="stylesheet">
+<link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <style>
       .bd-placeholder-img {
@@ -93,7 +95,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="product.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='product.css')}}" rel="stylesheet">
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -330,7 +332,8 @@
     </div>
   </div>
 </footer>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src=
+  <link href="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.min.js') }}" rel="stylesheet">
+</script>
     </body>
 </html>
