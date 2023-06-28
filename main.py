@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 from backend.slides_manip import copy_presentation
 from backend.slides_manip import get_presentation
@@ -7,15 +7,16 @@ from backend.GPT_engine import content_generation
 from backend.slides_creation import create_title_slide,create_left_image_slide,create_right_image_slide, create_title_sub_text_slide
 app = Flask(__name__)
 
-# response = {'slides': 
-            # [{'type_id': 'title', 'inputs': {'title': 'Global Warming', 'subtitle': 'Understanding the Phenomenon'}}, {'type_id': 'left-image-text', 'inputs': {'title': 'Causes of Global Warming', 'image_prompt': 'A coal power plant emitting carbon dioxide', 'body': 'Global warming is primarily caused by the emission of greenhouse gases, such as carbon dioxide and methane, from human activities like burning fossil fuels and deforestation of forests'}}, {'type_id': 'right-image-text', 'inputs': {'title': 'Effects of Global Warming', 'image_prompt': 'A polar bear on melting ice', 'body': 'Climate change due to global warming is causing sea levels to rise, ice to melt, and weather patterns to change, which is leading to issues like stronger and more frequent natural disasters, displacement of people, and extinction of species.'}}, {'type_id': 'left-image-text', 'inputs': {'title': 'Impact on Oceans', 'image_prompt': 'Coral reefs dying due to ocean acidification', 'body': 'Global warming is causing oceans to warm up and become more acidic, which is leading to coral bleaching, loss of marine life, anglobal warming by reducing their carbon footprint, adopting sustainable business practices, and investing in clean technologies. Doing so not only benefits the environment, but can also improve bottom lines and help companies stay competitive in a rapidly changing world.'}}, {'type_id': 'title-sub-text', 'inputs': {'title': 'The Urgency of Action', 'subtitle': 'Why We Must Act Now', 'body': 'Global warming is one of the greatest threats facing humanity and the planet. Failure to act now will lead to irreparable damage to the environment, social and economic disruptions, and loss of life. It is up to each and every individual to do their part in addressing this global crisis.'}}]}
+response = {'slides': 
+            [{'type_id': 'title', 'inputs': {'title': 'Global Warming', 'subtitle': 'Understanding the Phenomenon'}}, {'type_id': 'left-image-text', 'inputs': {'title': 'Causes of Global Warming', 'image_prompt': 'A coal power plant emitting carbon dioxide', 'body': 'Global warming is primarily caused by the emission of greenhouse gases, such as carbon dioxide and methane, from human activities like burning fossil fuels and deforestation of forests'}}, {'type_id': 'right-image-text', 'inputs': {'title': 'Effects of Global Warming', 'image_prompt': 'A polar bear on melting ice', 'body': 'Climate change due to global warming is causing sea levels to rise, ice to melt, and weather patterns to change, which is leading to issues like stronger and more frequent natural disasters, displacement of people, and extinction of species.'}}, {'type_id': 'left-image-text', 'inputs': {'title': 'Impact on Oceans', 'image_prompt': 'Coral reefs dying due to ocean acidification', 'body': 'Global warming is causing oceans to warm up and become more acidic, which is leading to coral bleaching, loss of marine life, anglobal warming by reducing their carbon footprint, adopting sustainable business practices, and investing in clean technologies. Doing so not only benefits the environment, but can also improve bottom lines and help companies stay competitive in a rapidly changing world.'}}, {'type_id': 'title-sub-text', 'inputs': {'title': 'The Urgency of Action', 'subtitle': 'Why We Must Act Now', 'body': 'Global warming is one of the greatest threats facing humanity and the planet. Failure to act now will lead to irreparable damage to the environment, social and economic disruptions, and loss of life. It is up to each and every individual to do their part in addressing this global crisis.'}}]}
 
-user_input = "artifical intelligence"
-response = content_generation(user_input)
+# user_input = "artifical intelligence"
+# response = content_generation(user_input)
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, people</p>"
+    return render_template("index.html")
+
 
 @app.route("/submit")
 def process_input():
@@ -41,7 +42,7 @@ def process_input():
             create_title_sub_text_slide(new_presentation_id,slide['inputs'], counter)
 
         counter = counter + 1
-    return "Presentation created succesfully"
+    return "Presentation created successfully"
 
 
 
