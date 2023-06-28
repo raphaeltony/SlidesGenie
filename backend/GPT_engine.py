@@ -84,4 +84,4 @@ def content_generation(user_input):
   print(d)
 
   return d
-
+  
