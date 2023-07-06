@@ -163,3 +163,7 @@ def create_title_sub_text_slide(presentation_id, content,counter):
     }
     response = slides_service.presentations().batchUpdate(
         presentationId=presentation_id, body=body).execute()
+
+
+def create_image_slide(presentation_id, content,counter):
+    
