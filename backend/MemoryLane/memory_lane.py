@@ -53,7 +53,7 @@ The above JSON contains two slide templates: title, image-text. Use this to gene
 
 
 
-def content_generation(user_input):
+def visualize(user_input):
     user_input = "user input : "+ user_input
 
     response = openai.ChatCompletion.create(
@@ -80,19 +80,19 @@ def content_generation(user_input):
 
     return d
 
-txt = '''Features of a Monopoly Market 
-Some characteristics of a monopoly market are as follows.
-The product has only one seller in the market.
+# txt = '''Features of a Monopoly Market 
+# Some characteristics of a monopoly market are as follows.
+# The product has only one seller in the market.
 
-Monopolies possess information that is unknown to others in the market.
+# Monopolies possess information that is unknown to others in the market.
 
-There are profit maximization and price discrimination associated with monopolistic markets. Monopolists are guided by the need to maximize profit either by expanding sales production or by raising the price.
+# There are profit maximization and price discrimination associated with monopolistic markets. Monopolists are guided by the need to maximize profit either by expanding sales production or by raising the price.
 
-It has high barriers to entry for any new firm that produces the same product.
+# It has high barriers to entry for any new firm that produces the same product.
 
-The monopolist is the price maker, i.e., it decides the price, which maximizes its profit. The price is determined by evaluating the demand for the product.
+# The monopolist is the price maker, i.e., it decides the price, which maximizes its profit. The price is determined by evaluating the demand for the product.
 
-The monopolist does not discriminate among customers and charges them all alike for the same product.
+# The monopolist does not discriminate among customers and charges them all alike for the same product.
 
-'''
-content_generation(txt)
+# '''
+# visualize(txt)
