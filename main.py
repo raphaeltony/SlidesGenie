@@ -4,7 +4,7 @@ from backend.slides_manip import copy_presentation
 from backend.slides_manip import get_presentation
 from backend.slides_manip import create_slide_copy
 from backend.GPT_engine import content_generation
-from backend.MemoryLane.memory_lane import visualize
+from backend.memory_lane import visualize
 from backend.slides_creation import create_title_slide,create_left_image_slide,create_right_image_slide, create_title_sub_text_slide,create_image_slide
 app = Flask(__name__)
 
