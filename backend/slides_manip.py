@@ -43,6 +43,10 @@ def create_slide_copy(presentation_id,slides,slide_type,counter):
     elif slide_type == 'title-sub-text':
         pageId = slides[3]['objectId']
 
+    #for memorylane
+    elif slide_type == 'image-text':
+        pageId = slides[1]['objectId']
+
     requests = {
     "requests" : [
     {
@@ -65,7 +69,7 @@ def create_slide_copy(presentation_id,slides,slide_type,counter):
         print("Slide not copied")
         return error
     
-    
+
 def get_presentation(presentation_id):
     presentation = slides_service.presentations().get(presentationId=presentation_id).execute()
     slides = presentation.get('slides')

@@ -5,7 +5,7 @@ from backend.slides_manip import get_presentation
 from backend.slides_manip import create_slide_copy
 from backend.GPT_engine import content_generation
 from backend.MemoryLane.memory_lane import visualize
-from backend.slides_creation import create_title_slide,create_left_image_slide,create_right_image_slide, create_title_sub_text_slide
+from backend.slides_creation import create_title_slide,create_left_image_slide,create_right_image_slide, create_title_sub_text_slide,create_image_slide
 app = Flask(__name__)
 
 # response = {'slides': 
@@ -22,7 +22,7 @@ def hello_world():
     return "<p>Hello, people</p>"
 
 @app.route("/memorylane")
-def hello_world():
+def memory():
     # response = visualize(user_input)
 
     new_presentation_id = copy_presentation("1oBjYbkCRWQwhOiNC4hHTMsuwIaURzPQvpYjXm2QVYLM",response['slides'][0]['inputs']['title'])
@@ -39,7 +39,9 @@ def hello_world():
         elif(slide['type_id'] == 'image-text'):
             create_image_slide(new_presentation_id,slide['inputs'], counter)
 
-    return "<p>Hello, people</p>"
+        counter = counter + 1
+    return "Presentation created succesfully"
+
 
 
 @app.route("/submit")
