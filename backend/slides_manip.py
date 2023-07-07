@@ -43,6 +43,10 @@ def create_slide_copy(presentation_id,slides,slide_type,counter):
     elif slide_type == 'title-sub-text':
         pageId = slides[3]['objectId']
 
+    #for memorylane
+    elif slide_type == 'image-text':
+        pageId = slides[1]['objectId']
+
     requests = {
     "requests" : [
     {
@@ -65,11 +69,55 @@ def create_slide_copy(presentation_id,slides,slide_type,counter):
         print("Slide not copied")
         return error
     
-    
+
 def get_presentation(presentation_id):
     presentation = slides_service.presentations().get(presentationId=presentation_id).execute()
     slides = presentation.get('slides')
     print(slides)
     return slides
+
+def delete_template_slides(presentation_id, slides):
+    requests = {"requests":[]}
+    for slide in slides:
+        requests["requests"].append(
+            {
+            "deleteObject": {
+                "objectId": slide["objectId"],
+                }
+            }
+        )
+
+    try:
+        response = slides_service.presentations() \
+            .batchUpdate(presentationId=presentation_id, body=requests).execute()
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        print("Template slides deleted")
+        return error
+    
+def reorder_slides(presentation_id, counter):
+    requests = {"requests":[]}
+    for i in range(counter-1,-1,-1):
+        requests["requests"].append(
+            {
+                "updateSlidesPosition": {
+                "slideObjectIds": [
+                    f"copiedSlide{i}"
+                ],
+        "insertionIndex": 0
+                }
+            }
+        )
+
+    try:
+        response = slides_service.presentations() \
+            .batchUpdate(presentationId=presentation_id, body=requests).execute()
+
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        print("Error reordering")
+        return error
+
 
 
