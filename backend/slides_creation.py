@@ -12,6 +12,9 @@ slides_service = get_slides_service()
 
 
 def create_title_slide(presentation_id, content,counter):
+    # Since memory lane does not have a subtitle field,have to manually set it
+    if 'subtitle' not in content.keys():
+        content['subtitle']=''
     requests = [
             {
                 'replaceAllText': {
@@ -20,6 +23,16 @@ def create_title_slide(presentation_id, content,counter):
                         'matchCase': True
                     },
                     'replaceText': content['title'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<title-subtitle>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['subtitle'],
                     'pageObjectIds':[f'copiedSlide{counter}']
                 }
             }
