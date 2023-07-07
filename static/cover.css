@@ -48,3 +48,8 @@ body {
   color: #fff;
   border-bottom-color: #fff;
 }
+
+#message {
+  height: 250px; 
+  background-color: rgb(109, 181, 181);
+}

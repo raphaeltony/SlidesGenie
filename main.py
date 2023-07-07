@@ -22,7 +22,7 @@ band represents a different price level, symbolizing how they extract more money
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, people</p>"
+    return render_template("mem_lane.html")
 
 @app.route("/memorylane")
 def memory():
