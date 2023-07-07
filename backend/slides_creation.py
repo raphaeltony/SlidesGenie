@@ -163,3 +163,36 @@ def create_title_sub_text_slide(presentation_id, content,counter):
     }
     response = slides_service.presentations().batchUpdate(
         presentationId=presentation_id, body=body).execute()
+
+
+def create_image_slide(presentation_id, content,counter):
+    requests = [
+            {
+                'replaceAllText': {
+                    'containsText': {
+                        'text': '<<image-text_body>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['visual'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+
+            {
+                'replaceAllShapesWithImage': {
+                    'imageUrl': image_generation(content['visual']),
+                    'replaceMethod': 'CENTER_INSIDE',
+                    'containsText': {
+                        'text': '<<image-text_image>>',
+                        'matchCase': True
+                    },
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            }
+    ]
+    
+    body = {
+        'requests': requests
+    }
+    response = slides_service.presentations().batchUpdate(
+        presentationId=presentation_id, body=body).execute()

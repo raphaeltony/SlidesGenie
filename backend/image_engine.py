@@ -15,6 +15,7 @@ def image_generation(image_prompt):
     # )
     # image_url = response['data'][0]['url']
 
-    # print(image_url)
-    # return image_url
-    return "https://th.bing.com/th/id/OIP.XCIK-I2WhMRFH43EO7Nv-wHaE8?pid=ImgDet&rs=1"
+    image_url = "https://www.betterup.com/hs-fs/hubfs/image5-2.png?width=1999&name=image5-2.png"
+    print(image_url)
+    return image_url
+
