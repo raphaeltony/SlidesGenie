@@ -48,3 +48,7 @@ body {
   color: #fff;
   border-bottom-color: #fff;
 }
+
+#message::placeholder{
+  text-align: center; 
+}

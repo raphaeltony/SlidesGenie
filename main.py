@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 
 from backend.slides_manip import copy_presentation, get_presentation, create_slide_copy, delete_template_slides, reorder_slides
 from backend.GPT_engine import content_generation
@@ -14,18 +14,37 @@ response = {'slides':
 # band rep# resents a different price level, symbolizing how they extract more money from customers based on their willingness or ability to pay.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'High Barriers to Entry', 'visual': 'Envision a large impenetrable wall surrounding the market, guarded by dragons and mountains. It seems impossible for any new firm to enter and compete with the monopolist.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Price Maker', 'visual': 'Picture the monopolist holding a giant gavel, ready to hammer down the price of the product. They possess the ultimate power to dictate the value of their goods, transcending any interference from the market or competitors.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Demand', 'visual': "See a crowd of people, each holding a sign representing their desire for the monopolist's product. The monopolist uses a magnifying glass to selectively analyze each person's demand, measuring their willingness to pay and determining the price accordingly."}}, {'type_id': 'image-text', 'inputs': {'keyword': 'No Discrimination', 'visual': 'Imagine the monopolist standing on a stage, surrounded by a diverse audience of individuals. The monopolist wears a blindfold, representing their refusal to differentiate between customers based on any factors. All customers are treated equally, paying the same price for the same product.'}}]} 
 
 
-response = {'slides': [{'type_id': 'title', 'inputs': {'title': 'Features of a Monopoly Market'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Monopoly Market', 'visual': 'Imagine a bustling marketplace, but with a single vendor standing alone in the center, surrounded by empty stalls. The market is dominated by this solitary figure.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'One Seller', 'visual': "Visualize this seller as \
-a giant towering over the rest of the market, holding a sign that reads 'Only I can sell!' The other vendors cower in fear and submission."}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Unknown Information', 'visual': 'Picture the monopolist wearing a cloak of shadows, whispering secrets to themselves. They hold hidden knowledge that gives them a mysterious advantage over the others.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Profit Maximization', 'visual': 'See the monopolist transforming into a money-hungry monster, with coins spouting from their greedy mouth. They have an insatiable desire for wealth and are willing to devour everything in their path to achieve maximum profit.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Price Discrimination', 'visual': 'Imagine the monopolist wearing a hat with different colored bands. Each \
-band represents a different price level, symbolizing how they extract more money from customers based on their willingness or ability to pay.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'High Barriers to Entry', 'visual': 'Envision a large impenetrable wall surrounding the market, guarded by dragons and mountains. It seems impossible for any new firm to enter and compete with the monopolist.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Price Maker', 'visual': 'Picture the monopolist holding a giant gavel, ready to hammer down the price of the product. They possess the ultimate power to dictate the value of their goods, transcending any interference from the market or competitors.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Demand', 'visual': "See a crowd of people, each holding a sign representing their desire for the monopolist's product. The monopolist uses a magnifying glass to selectively analyze each person's demand, measuring their willingness to pay and determining the price accordingly."}}, {'type_id': 'image-text', 'inputs': {'keyword': 'No Discrimination', 'visual': 'Imagine the monopolist standing on a stage, surrounded by a diverse audience of individuals. The monopolist wears a blindfold, representing their refusal to differentiate between customers based on any factors. All customers are treated equally, paying the same price for the same product.'}}]} 
+# response = {'slides': [{'type_id': 'title', 'inputs': {'title': 'Features of a Monopoly Market'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Monopoly Market', 'visual': 'Imagine a bustling marketplace, but with a single vendor standing alone in the center, surrounded by empty stalls. The market is dominated by this solitary figure.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'One Seller', 'visual': "Visualize this seller as \
+# a giant towering over the rest of the market, holding a sign that reads 'Only I can sell!' The other vendors cower in fear and submission."}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Unknown Information', 'visual': 'Picture the monopolist wearing a cloak of shadows, whispering secrets to themselves. They hold hidden knowledge that gives them a mysterious advantage over the others.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Profit Maximization', 'visual': 'See the monopolist transforming into a money-hungry monster, with coins spouting from their greedy mouth. They have an insatiable desire for wealth and are willing to devour everything in their path to achieve maximum profit.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Price Discrimination', 'visual': 'Imagine the monopolist wearing a hat with different colored bands. Each \
+# band represents a different price level, symbolizing how they extract more money from customers based on their willingness or ability to pay.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'High Barriers to Entry', 'visual': 'Envision a large impenetrable wall surrounding the market, guarded by dragons and mountains. It seems impossible for any new firm to enter and compete with the monopolist.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Price Maker', 'visual': 'Picture the monopolist holding a giant gavel, ready to hammer down the price of the product. They possess the ultimate power to dictate the value of their goods, transcending any interference from the market or competitors.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Demand', 'visual': "See a crowd of people, each holding a sign representing their desire for the monopolist's product. The monopolist uses a magnifying glass to selectively analyze each person's demand, measuring their willingness to pay and determining the price accordingly."}}, {'type_id': 'image-text', 'inputs': {'keyword': 'No Discrimination', 'visual': 'Imagine the monopolist standing on a stage, surrounded by a diverse audience of individuals. The monopolist wears a blindfold, representing their refusal to differentiate between customers based on any factors. All customers are treated equally, paying the same price for the same product.'}}]} 
 
+SLIDE_DARK="1Qw0oqIpGSrEyQZkFhFnzxj6-4kMq8X1TnSdqpG94Ch8"
+SLIDE_PROF="159B-JLzNz0rWHMHYbQFdfitqoqObyxrMfj-RtEXG91M"
+SLIDE_FUN="1Cu60Vh1dYYaEqb5vqM97PwfmuWFUSxgAoRAaqqdgmZA"
 
-
-@app.route("/")
-def hello_world():
-    return render_template("mem_lane.html")
+@app.route("/slidesgenie")
+def get_slides_genie():
+    return render_template("slides_genie.html")
 
 @app.route("/memorylane")
-def memory():
+def get_mem_lane():
+    return render_template("mem_lane.html")
+
+#common submit endpoint for both slidesgenie and memorylane
+@app.route('/submit/', methods = ['POST'])
+def process_submit():
+    if request.method == 'POST':
+        form_data = dict(request.form)
+        source = request.headers["Referer"].split('/')[-1] #Getting from which the submit request came
+        if(str(source) == 'slidesgenie'):
+            slides_genie(form_data['userInput'],form_data['styleSelect'])
+        elif(str(source) == 'memorylane'):
+            memory_lane(form_data['userInput'])
+        else:
+            return "Something went wrong"
+    return "Success"
+
+def memory_lane(user_input):
     # response = visualize(user_input)
 
     new_presentation_id = copy_presentation("1oBjYbkCRWQwhOiNC4hHTMsuwIaURzPQvpYjXm2QVYLM",response['slides'][0]['inputs']['title'])
@@ -46,13 +65,18 @@ def memory():
     delete_template_slides(new_presentation_id,new_slides)
     reorder_slides(new_presentation_id,counter)
     return "Presentation created succesfully"
+        
 
-@app.route("/submit")
-def process_input():
-
-    response = content_generation(user_input)
-
-    new_presentation_id = copy_presentation("1Qw0oqIpGSrEyQZkFhFnzxj6-4kMq8X1TnSdqpG94Ch8",response['slides'][0]['inputs']['title'])
+def slides_genie(user_input,slideStyle):
+    if slideStyle=='dark':
+        slideStyle = SLIDE_DARK
+    elif slideStyle=='professional':
+        slideStyle = SLIDE_PROF
+    elif slideStyle=='fun':
+        slideStyle = SLIDE_FUN
+    
+    # response = content_generation(user_input)
+    new_presentation_id = copy_presentation(slideStyle,response['slides'][0]['inputs']['title'])
     new_slides = get_presentation(new_presentation_id)
 
     counter = 0
