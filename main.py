@@ -24,6 +24,29 @@ band represents a different price level, symbolizing how they extract more money
 def hello_world():
     return "<p>Hello, people</p>"
 
+@app.route("/memorylane")
+def memory():
+    # response = visualize(user_input)
+
+    new_presentation_id = copy_presentation("1oBjYbkCRWQwhOiNC4hHTMsuwIaURzPQvpYjXm2QVYLM",response['slides'][0]['inputs']['title'])
+    new_slides = get_presentation(new_presentation_id)
+    
+    counter = 0
+
+    for slide in response['slides']:
+        create_slide_copy(new_presentation_id,new_slides,slide['type_id'],counter)
+
+        if(slide['type_id'] == 'title'):
+            create_title_slide(new_presentation_id,slide['inputs'],counter)
+
+        elif(slide['type_id'] == 'image-text'):
+            create_image_slide(new_presentation_id,slide['inputs'], counter)
+
+        counter = counter + 1
+    delete_template_slides(new_presentation_id,new_slides)
+    reorder_slides(new_presentation_id,counter)
+    return "Presentation created succesfully"
+
 @app.route("/submit")
 def process_input():
 
