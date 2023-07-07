@@ -38,6 +38,8 @@ def memory():
             create_image_slide(new_presentation_id,slide['inputs'], counter)
 
         counter = counter + 1
+    delete_template_slides(new_presentation_id,new_slides)
+    reorder_slides(new_presentation_id,counter)
     return "Presentation created succesfully"
 
 
