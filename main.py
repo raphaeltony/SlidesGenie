@@ -1,8 +1,6 @@
 from flask import Flask
 
-from backend.slides_manip import copy_presentation
-from backend.slides_manip import get_presentation
-from backend.slides_manip import create_slide_copy
+from backend.slides_manip import copy_presentation, get_presentation, create_slide_copy, delete_template_slides, reorder_slides
 from backend.GPT_engine import content_generation
 from backend.memory_lane import visualize
 from backend.slides_creation import create_title_slide,create_left_image_slide,create_right_image_slide, create_title_sub_text_slide,create_image_slide
@@ -49,7 +47,6 @@ def process_input():
 
     response = content_generation(user_input)
 
-
     new_presentation_id = copy_presentation("1Qw0oqIpGSrEyQZkFhFnzxj6-4kMq8X1TnSdqpG94Ch8",response['slides'][0]['inputs']['title'])
     new_slides = get_presentation(new_presentation_id)
 
@@ -71,6 +68,8 @@ def process_input():
             create_title_sub_text_slide(new_presentation_id,slide['inputs'], counter)
 
         counter = counter + 1
+    delete_template_slides(new_presentation_id,new_slides)
+    reorder_slides(new_presentation_id,counter)
     return "Presentation created succesfully"
 
 
