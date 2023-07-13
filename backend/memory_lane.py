@@ -11,7 +11,7 @@ You help people to remember study material
 by using vivid strange imagery. 
 Consider the following user input.
 Identify the main topic and the keywords related to that topic. 
-Generate a vivid imagery for each of the keywords in the paragraph in such a way that each imagery leads to the next one.
+Generate a vivid imagery for each of the keywords in the paragraph in such a way that each imagery connects to the next one.
 '''
 
 prompt2 = '''
