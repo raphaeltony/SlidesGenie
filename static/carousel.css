@@ -5,7 +5,7 @@
 body {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  color: rgb(var(--bs-tertiary-color-rgb));
+  color: white;
 }
 
 
@@ -15,16 +15,41 @@ body {
 /* Carousel base class */
 .carousel {
   margin-bottom: 4rem;
+  display: flex;
+  overflow: hidden;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
-  bottom: 3rem;
+  bottom: 1rem;
   z-index: 10;
 }
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
   height: 32rem;
+}
+.carousel-item  img{
+  position: absolute;
+  object-fit:cover;
+  width: 100%;
+  top: 0;
+  left: 0;
+  min-height: 572px;
+  background:rgba(0,0,0,0.7);
+}
+
+/* .carousel {
+  display: flex;
+  overflow: hidden;
+} */
+
+.carousel-slide {
+  flex: 0 0 100%;
+}
+
+.slide-img {
+  width: 100%;
+  height: auto;
 }
 
 
@@ -57,6 +82,9 @@ body {
   letter-spacing: -.05rem;
 }
 
+.trybutton{
+   color:white;
+}
 /* rtl:end:remove */
 
 /* RESPONSIVE CSS
@@ -72,6 +100,13 @@ body {
 
   .featurette-heading {
     font-size: 50px;
+    
+    padding-left: 60%;
+  }
+
+  .lead{
+    
+    padding-left: 50%;
   }
 }
 
