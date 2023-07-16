@@ -164,10 +164,10 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="#">SlidesGenie</a>
+            <a class="nav-link" href="{{url_for('get_slides_genie')}}">SlidesGenie</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="#">MemoryLane</a>
+            <a class="nav-link " href="{{url_for('get_mem_lane')}}">MemoryLane</a>
           </li>
         </ul>
         <!-- <form class="d-flex" role="search">
@@ -197,7 +197,7 @@
             <!-- <img src="images\Default_Generate_a_visually_stunning_PowerPoint_presentation_t_0_3e2c3c68-66d4-48de-8f7d-40780a6d79e3_1.jpg" alt="Image 1"> -->
             <h1>SlidesGenie</h1> 
             <p class="opacity-75">You provide the topic,we provide the presentation.</p>
-            <p><button class="btn btn-dark"  href="#">Try it out!</button></p>
+            <p><button class="btn btn-dark"  href="{{url_for('get_slides_genie')}}">Try it out!</button></p>
           </div>
         </div>
         <!-- <div class="carousel-slide">
@@ -225,7 +225,7 @@
           <div class="carousel-caption">
             <h1>MemoryLane</h1>
             <p>Want to learn better?Checkout our AI Story Generator.</p>
-            <p><a class="btn btn-dark" href="#">Try it out!</a></p>
+            <p><a class="btn btn-dark" href="{{url_for('get_mem_lane')}}">Try it out!</a></p>
           </div>
         </div>
       </div>
