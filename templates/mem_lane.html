@@ -99,8 +99,13 @@
       z-index: 1500;
     }
 
-    
-   
+    /* div.textbxclr {
+     background-color: black;
+     border: 1px solid black;
+     color:white;
+     opacity: 0.5;
+    }
+    */
   </style>
 
 
@@ -121,14 +126,17 @@
     </header>
 
     <main class="px-3">
+     <!-- <div class="transl"> -->
       <h1>Memory Lane</h1>
       <p class="lead">Tell us the facts. We will weave a story out of it. Learn fast. Click submit to see the magic.</p>
 
       <form action="/submit" method = "POST">
-        <div class="mb-3">
-          <textarea placeholder="Enter your topic" class="form-control form-control-lg" id="message"
+        <div class="textbxclr">
+         <div class="mb-3">
+          <textarea  placeholder="Enter your topic"  class="form-control form-control-lg" id="message"
             rows="10" name="userInput" required></textarea>
-        </div>
+         </div>
+        </div> 
         <button type="submit" class="btn btn-lg btn-light fw-bold border-white bg-white">Submit</button>
       </form>
 
@@ -136,7 +144,7 @@
 
 
 
-
+     <!-- </div> -->
     </main>
 
     <footer class="mt-auto text-white-50">
