@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,redirect
 
 from backend.slides_manip import copy_presentation, get_presentation, create_slide_copy, delete_template_slides, reorder_slides
 from backend.GPT_engine import content_generation
@@ -26,16 +26,17 @@ def get_mem_lane():
 #common submit endpoint for both slidesgenie and memorylane
 @app.route('/submit/', methods = ['POST'])
 def process_submit():
+    new_presentation_id=""
     if request.method == 'POST':
         form_data = dict(request.form)
         source = request.headers["Referer"].split('/')[-1] #Getting from which the submit request came
         if(str(source) == 'slidesgenie'):
-            slides_genie(form_data['userInput'],form_data['styleSelect'])
+            new_presentation_id += slides_genie(form_data['userInput'],form_data['styleSelect'])
         elif(str(source) == 'memorylane'):
-            memory_lane(form_data['userInput'])
+            new_presentation_id += memory_lane(form_data['userInput'])
         else:
             return "Something went wrong"
-    return "Success"
+    return redirect(f"https://docs.google.com/presentation/d/{new_presentation_id}")
 
 def memory_lane(user_input):
     # response = {'slides': [{'type_id': 'title', 'inputs': {'title': 'Features of a Monopoly Market'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Monopoly Market', 'visual': 'Imagine a bustling marketplace, but with a single vendor standing alone in the center, surrounded by empty stalls. The market is dominated by this solitary figure.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'One Seller', 'visual': "Visualize this seller as \
@@ -61,7 +62,7 @@ def memory_lane(user_input):
         counter = counter + 1
     delete_template_slides(new_presentation_id,new_slides)
     reorder_slides(new_presentation_id,counter)
-    return "Presentation created succesfully"
+    return new_presentation_id
         
 
 def slides_genie(user_input,slideStyle):
@@ -100,7 +101,7 @@ def slides_genie(user_input,slideStyle):
         counter = counter + 1
     delete_template_slides(new_presentation_id,new_slides)
     reorder_slides(new_presentation_id,counter)
-    return "Presentation created successfully"
+    return new_presentation_id
 
 
 
