@@ -15,6 +15,11 @@ SLIDE_DARK="1Qw0oqIpGSrEyQZkFhFnzxj6-4kMq8X1TnSdqpG94Ch8"
 SLIDE_PROF="159B-JLzNz0rWHMHYbQFdfitqoqObyxrMfj-RtEXG91M"
 SLIDE_FUN="1Cu60Vh1dYYaEqb5vqM97PwfmuWFUSxgAoRAaqqdgmZA"
 
+@app.route("/")
+def hello_world():
+    return render_template("index.html")
+
+
 @app.route("/slidesgenie")
 def get_slides_genie():
     return render_template("slides_genie.html")
