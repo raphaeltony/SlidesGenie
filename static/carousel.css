@@ -21,8 +21,11 @@ body {
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   bottom: 1rem;
+  color:black;
   z-index: 10;
+  align-content: center;
 }
+
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
@@ -50,6 +53,21 @@ body {
 .slide-img {
   width: 100%;
   height: auto;
+}
+
+.hstyle
+{
+  align-self: center;
+  padding-top: 10%;
+
+}
+
+.pstyle
+{
+  align-self: center;
+  font: 1 em san-serif;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 
