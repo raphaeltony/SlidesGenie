@@ -18,6 +18,14 @@
   <link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <style>
+     body {
+      background-image: url('static/images/memorylane.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+    }
+
+
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -90,6 +98,14 @@
     .bd-mode-toggle {
       z-index: 1500;
     }
+
+    /* div.textbxclr {
+     background-color: black;
+     border: 1px solid black;
+     color:white;
+     opacity: 0.5;
+    }
+    */
   </style>
 
 
@@ -110,8 +126,10 @@
     </header>
 
     <main class="px-3">
+     <!-- <div class="transl"> -->
       <h1>Memory Lane</h1>
       <p class="lead">Tell us the facts. We will weave a story out of it. Learn fast. Click submit to see the magic.</p>
+
 
       <form>
         <div class="mb-3">
@@ -124,6 +142,7 @@
       <div class="progress mt-3 d-none" id="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100">
         <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar" style="width: 3%"></div>
       </div>
+
 
     </main>
 

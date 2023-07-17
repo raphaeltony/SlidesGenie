@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="../assets/js/color-modes.js"></script>
+  <head>
+    <script src="../assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +16,6 @@
 
     
 
-<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <body style="background-color:black"></body>
@@ -92,6 +92,27 @@
         z-index: 1500;
       }
       
+            /* Three image containers (use 25% for four, and 50% for two, etc) */
+      .column {
+        float: left;
+        width: 33.33%;
+        padding: 0px;
+        border: 1px solid white; 
+        text-align: center;
+      }
+      .column img {
+        max-width: 100%; 
+        height:  auto;
+      }
+      /* Clear floats after image containers */
+      .row::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+
+
     </style>
 
     
@@ -99,56 +120,8 @@
     <link href="{{ url_for('static', filename='carousel.css') }}" rel="stylesheet">
   </head>
   <body>
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-      <symbol id="check2" viewBox="0 0 16 16">
-        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-      </symbol>
-      <symbol id="circle-half" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
-      </symbol>
-      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
-        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
-      </symbol>
-      <symbol id="sun-fill" viewBox="0 0 16 16">
-        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
-      </symbol>
-    </svg>
 
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-              id="bd-theme"
-              type="button"
-              aria-expanded="false"
-              data-bs-toggle="dropdown"
-              aria-label="Toggle theme (auto)">
-        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-            Light
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-            Dark
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em"><use href="#circle-half"></use></svg>
-            Auto
-            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
-          </button>
-        </li>
-      </ul>
-    </div>
+  
 
     
 <header data-bs-theme="dark">
@@ -190,7 +163,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
       <!-- <svg class="bd-placeholder-img"  width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg> -->
-        <img  src="static/images/slidesgenie.jpg" alt="Image 1">
+        <img  src="static/images/slidesgenie2.jpg" alt="Image 1">
         <div class="container">
           <!-- <img src="images\Default_Generate_a_visually_stunning_PowerPoint_presentation_t_0_3e2c3c68-66d4-48de-8f7d-40780a6d79e3_1.jpg" alt="Image 1"> -->
           <div class="carousel-caption text-start">
@@ -217,14 +190,14 @@
       
       <div class="carousel-item">
         <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/><image x="60" y="60" width="180" height="80" xlink:href="images\Default_As_the_script_is_unraveled_a_new_version_of_reality_co_0_90bb28f6-df23-42e5-876a-d158d7dfb314_1.jpg" /></svg> -->
-        <img  src="static/images/memorylane.jpg" alt="Image 1">
+        <img  src="static/images/memorylane_background.jpg" alt="Image 1">
         <div class="container">
           <div class="carousel-slide">
             <!-- <img src="{{ url_for('static', filename='static/images/slidesgenie.jpg') }}" class= "img-fluid" alt="Image 2"> -->
           </div>
-          <div class="carousel-caption">
-            <h1>MemoryLane</h1>
-            <p>Want to learn better?Checkout our AI Story Generator.</p>
+          <div class="carousel-caption text-start">
+            <h1>MemoryLane </h1>
+            <p>Want to learn better?<br>Checkout our AI Story Generator.</p>
             <p><a class="btn btn-dark" href="{{url_for('get_mem_lane')}}">Try it out!</a></p>
           </div>
         </div>
@@ -274,14 +247,17 @@
 
     
 
-    <div class="row featurette">
+    <!-- <div class="row featurette">
+      
       <div class="col-md-7">
         <h2 class="featurette-heading fw-normal lh-1">SlidesGenie <span class="text-body-secondary"> </span></h2>
         <p class="lead">Revolutionize presentations effortlessly with AI Slides Generator, creating stunning slides that captivate and deliver your message effectively.</p>
       </div>
-      <!-- <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text><image href="images\Default_Generate_a_visually_stunning_PowerPoint_presentation_t_0_3e2c3c68-66d4-48de-8f7d-40780a6d79e3_1.jpg" x="50" y="50" width="300" height="100" /></svg>
-      </div> -->
+
+      <div class="col-md-5">
+              <img  src="static/images/memorylane.jpg" alt="Image 1" width="500" height="600">
+              
+      </div>
     </div>
 
     <hr class="featurette-divider">
@@ -290,13 +266,13 @@
       <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading fw-normal lh-1">MemoryLane <span class="text-body-secondary"> </span></h2>
         <p class="lead">Tranform your material into a memorable story for maximum information retention.</p>
-      </div>
+      </div> -->
       <!-- <div class="col-md-5 order-md-1">
         <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
       </div> -->
-    </div>
+    <!-- </div>
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider"> -->
 
     <!-- <hr class="featurette-divider">
 
@@ -313,10 +289,38 @@
     <hr class="featurette-divider"> -->
 
     <!-- /END THE FEATURETTES -->
+    <!-- static/images/slidesgenie2.jpg -->
+  <!-- </div>/.container -->
 
-  </div><!-- /.container -->
+  <!-- OUR CODE -->
+  <div class="row">
+    <div class="column">
+      <img src="static/images/slidesgenie2.jpg" alt="Snow" style="width:100%">
+    </div>
+    <div class="column">
+      <h2 class="hstyle">SlidesGenie</h2>
+      <p  class="pstyle">Revolutionize presentations effortlessly with AI Slides Generator, creating stunning slides that captivate and deliver your message effectively.</p>
+    </div>
+    <div class="column">
+      <img src="static/images/slidesgenie2.jpg" alt="Mountains" style="width:100%">
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="column">
+      <img src="static/images/memorylane.jpg" alt="Snow" style="width:100%">
+    </div>
+    <div class="column">
+      <h2 class="hstyle">MemoryLane</h2>
+      <p  class="pstyle">Tranform your material into a memorable story for maximum information retention.</p>
+    </div>
+    <div class="column">
+      <img src="static/images/memorylane.jpg" alt="Mountains" style="width:100%">
+    </div>
+  </div>
 
+  
+  
   <!-- FOOTER -->
   <footer class="container">
     <p class="float-end"><a href="#">Back to top</a></p>

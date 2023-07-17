@@ -14,15 +14,18 @@ body {
 
 /* Carousel base class */
 .carousel {
-  margin-bottom: 4rem;
+  margin-bottom: 0rem;
   display: flex;
   overflow: hidden;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   bottom: 1rem;
+  color:black;
   z-index: 10;
+  align-content: center;
 }
+
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
@@ -52,6 +55,21 @@ body {
   height: auto;
 }
 
+.hstyle
+{
+  align-self: center;
+  padding-top: 10%;
+
+}
+
+.pstyle
+{
+  align-self: center;
+  font: 1 em san-serif;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
@@ -60,11 +78,13 @@ body {
 .marketing .col-lg-4 {
   margin-bottom: 1.5rem;
   text-align: center;
+  padding: 0px;
 }
 /* rtl:begin:ignore */
 .marketing .col-lg-4 p {
   margin-right: .75rem;
   margin-left: .75rem;
+  padding: 0px;
 }
 /* rtl:end:ignore */
 

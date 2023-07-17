@@ -52,3 +52,20 @@ body {
 #message::placeholder{
   text-align: center; 
 }
+
+textarea{
+  width: 100%;
+  background-color: #000;
+  opacity: 0.7;
+  border: none;
+  outline: none;
+}
+
+.abc{
+  color:black;
+}
+
+.lead{
+  color:black;
+
+}

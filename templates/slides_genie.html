@@ -18,6 +18,13 @@
   <link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <style>
+    body {
+      background-image: url('static/images/slidesgenie2.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+    }
+
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -102,15 +109,15 @@
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
       <div>
-        <h3 class="float-md-start mb-0">Welcome</h3>
+        <h3 class="float-md-start mb-0" style="color: black;">Welcome</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-          <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="{{url_for('hello_world')}}">Home</a>
+          <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="{{url_for('hello_world')}}" style="color: white;">Home</a>
         </nav>
       </div>
     </header>
 
     <main class="px-3">
-      <h1>Slides Genie</h1>
+      <h1 class="abc">Slides Genie</h1>
       <p class="lead">Tell us your topic. We create the slides for you. Click submit to see the magic.</p>
 
       <form >
@@ -151,7 +158,7 @@
 
     </main>
 
-    <footer class="mt-auto text-white-50">
+    <footer class="mt-auto text-white-70">
       <p>&copy;SlidesGenie</p>
     </footer>
   </div>
