@@ -49,6 +49,19 @@ body {
   border-bottom-color: #fff;
 }
 
+.lead{
+  font-weight:bold;
+}
+
+textarea{
+  width: 100%;
+  background-color: #000;
+  opacity: 0.5;
+  border: none;
+  outline: none;
+}
+
+
 #message::placeholder{
   text-align: center; 
 }
