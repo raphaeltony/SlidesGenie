@@ -183,6 +183,17 @@ def create_image_slide(presentation_id, content,counter):
             {
                 'replaceAllText': {
                     'containsText': {
+                        'text': '<<image-text_title>>',
+                        'matchCase': True
+                    },
+                    'replaceText': content['keyword'],
+                    'pageObjectIds':[f'copiedSlide{counter}']
+                }
+            },
+
+            {
+                'replaceAllText': {
+                    'containsText': {
                         'text': '<<image-text_body>>',
                         'matchCase': True
                     },

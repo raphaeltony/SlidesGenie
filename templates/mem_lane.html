@@ -130,21 +130,20 @@
       <h1>Memory Lane</h1>
       <p class="lead">Tell us the facts. We will weave a story out of it. Learn fast. Click submit to see the magic.</p>
 
-      <form action="/submit" method = "POST">
-        <div class="textbxclr">
-         <div class="mb-3">
-          <textarea  placeholder="Enter your topic"  class="form-control form-control-lg" id="message"
+
+      <form>
+        <div class="mb-3">
+          <textarea placeholder="Enter your topic" class="form-control form-control-lg" id="message"
             rows="10" name="userInput" required></textarea>
-         </div>
-        </div> 
-        <button type="submit" class="btn btn-lg btn-light fw-bold border-white bg-white">Submit</button>
+        </div>
+        <button type="submit" id="submitButton" class="btn btn-lg btn-light fw-bold border-white bg-white">Submit</button>
       </form>
 
+      <div class="progress mt-3 d-none" id="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar" style="width: 3%"></div>
+      </div>
 
 
-
-
-     <!-- </div> -->
     </main>
 
     <footer class="mt-auto text-white-50">
@@ -152,6 +151,7 @@
     </footer>
   </div>
   <script src="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
 
 </body>
 
