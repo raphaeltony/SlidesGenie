@@ -116,6 +116,12 @@ body {
 .trybutton{
    color:white;
 }
+
+.float-end img{
+  width: 10%;
+  margin-left: 85%;
+  padding-top: 2%;
+}
 /* rtl:end:remove */
 
 /* RESPONSIVE CSS
