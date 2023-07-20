@@ -19,11 +19,22 @@ body {
   overflow: hidden;
 }
 /* Since positioning the image, we need to help out the caption */
+/* .carousel-caption {
+  bottom: 1rem;
+  color:black;
+  z-index: 10;
+  align-content: center;
+} */
+
 .carousel-caption {
   bottom: 1rem;
   color:black;
   z-index: 10;
   align-content: center;
+  background: rgba(255, 255, 255,0.25);
+  padding-left: 3%;
+  padding-right: 3%;
+  width: fit-content;
 }
 
 
