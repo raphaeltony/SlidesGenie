@@ -2,16 +2,13 @@ import openai
 import json
 from dotenv import load_dotenv
 import os
-
+from backend.prompt_examples import user_inputs,assistant_answers
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API")
 
-prompt1 ='''You are an AI called MemoryLane. 
-You help people to remember study material 
-by using vivid strange imagery. 
-Consider the following user input.
-Identify the main topic and the keywords related to that topic. 
-Generate a vivid imagery for each of the keywords in the paragraph in such a way that each imagery connects to the next one.
+prompt1 ='''You are an AI called MemoryLane. You help people to remember study material by using mnemonic images that use vivid strange imagery.  Consider the following user input.
+Identify the main topic and generate short keywords related to that topic from the input. 
+Generate vivid imagery for each of the keywords in such a way that each imagery connects to the next keyword's imagery.
 '''
 
 prompt2 = '''
@@ -52,7 +49,6 @@ The above JSON contains two slide templates: title, image-text. Use this to gene
 '''
 
 
-
 def visualize(user_input):
     user_input = "user input : "+ user_input
 
@@ -60,6 +56,13 @@ def visualize(user_input):
         model="gpt-3.5-turbo",
         messages=[
                 {"role": "system", "content": prompt1},
+                {"role": "user", "content": user_inputs[0]},
+                {"role": "assistant", "content": assistant_answers[0]},
+                {"role": "user", "content": user_inputs[1]},
+                {"role": "assistant", "content": assistant_answers[1]},
+                {"role": "user", "content": user_inputs[2]},
+                {"role": "assistant", "content": assistant_answers[2]},
+
                 {"role": "user", "content": user_input},
             ]
     )
@@ -80,19 +83,3 @@ def visualize(user_input):
 
     return d
 
-# txt = '''Features of a Monopoly Market 
-# Some characteristics of a monopoly market are as follows.
-# The product has only one seller in the market.
-
-# Monopolies possess information that is unknown to others in the market.
-
-# There are profit maximization and price discrimination associated with monopolistic markets. Monopolists are guided by the need to maximize profit either by expanding sales production or by raising the price.
-
-# It has high barriers to entry for any new firm that produces the same product.
-
-# The monopolist is the price maker, i.e., it decides the price, which maximizes its profit. The price is determined by evaluating the demand for the product.
-
-# The monopolist does not discriminate among customers and charges them all alike for the same product.
-
-# '''
-# visualize(txt)
