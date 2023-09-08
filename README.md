@@ -20,7 +20,7 @@ The __SlidesGenie__ component allows users to input a topic. ChatGPT API is used
 
 ## Pre-requisites
 - Python
-- All dependencies mentioned in `requirements.txt`
+- All dependencies mentioned in `requirements.txt` to be installed.
 - A Google Cloud Platform project with the **Drive API** and **Google Slides API** enabled, along with its authorization credentials for a desktop application. Check out the following section [(Setting Up Google Cloud Console)](#setting-up-google-cloud-console) to learn how to implement this.
 - OpenAI API Key: Create a .env file and save the contents with `OPENAI_API=<your-key-here>`
 
