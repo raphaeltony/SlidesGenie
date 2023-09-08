@@ -4,7 +4,7 @@ This project has two components:
 - **Memory Lane**: An AI-powered learning tool that creates bizarre stories around the input learning material and presents it in a visual format to improve retention.
 - **SlideGenie**: An AI slides generator that generates Google Slides presentations based on the topic entered by the user.
 
-https://github.com/raphaeltony/SlidesGenie/assets/30729856/484800ea-040f-4e01-801a-1ee8db7b2249
+https://github.com/raphaeltony/SlidesGenie/assets/30729856/c65d950e-0919-4df9-9531-9b572bad6aa2
 
 
 ## Memory Lane Component (AI Learning Tool)
