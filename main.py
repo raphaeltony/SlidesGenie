@@ -19,7 +19,7 @@ SLIDE_FUN="1Cu60Vh1dYYaEqb5vqM97PwfmuWFUSxgAoRAaqqdgmZA"
 
 @app.route("/")
 def hello_world():
-    return render_template("index.html")
+    return render_template("mem_lane.html")
 
 
 @app.route("/slidesgenie")
@@ -52,7 +52,7 @@ def memory_lane(user_input):
 
     response = visualize(user_input)
 
-    new_presentation_id = copy_presentation("1oBjYbkCRWQwhOiNC4hHTMsuwIaURzPQvpYjXm2QVYLM",response['slides'][0]['inputs']['title'])
+    new_presentation_id = copy_presentation("1ZU2Mwwgt81zePUIX1L7PADqHbvyrYeTJWTSJYSgN_3w",response['slides'][0]['inputs']['title'])
     new_slides = get_presentation(new_presentation_id)
     
     counter = 0
