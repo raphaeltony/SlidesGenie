@@ -19,7 +19,7 @@ SLIDE_FUN="1Cu60Vh1dYYaEqb5vqM97PwfmuWFUSxgAoRAaqqdgmZA"
 
 @app.route("/")
 def hello_world():
-    return render_template("mem_lane.html")
+    return redirect("/memorylane")
 
 
 @app.route("/slidesgenie")
