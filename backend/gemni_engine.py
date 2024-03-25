@@ -1,9 +1,9 @@
 import google.generativeai as genai
 import os
-from IPython.display import display
-from IPython.display import Markdown
-import pathlib
-import textwrap
+# from IPython.display import display
+# from IPython.display import Markdown
+# import pathlib
+# import textwrap
 import json
 import re
 
@@ -11,9 +11,9 @@ import re
 gemini_api_key = 'AIzaSyDAC1T59jvKl6qw4JJhyyco8Y6et_hQ8E4'
 genai.configure(api_key = gemini_api_key)
 
-def to_markdown(text):
-  text = text.replace('•', '  *')
-  return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
+# def to_markdown(text):
+#   text = text.replace('•', '  *')
+#   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
 model = genai.GenerativeModel('gemini-pro')
 
@@ -61,55 +61,13 @@ The above JSON contains two slide templates: title, image-text. Use this to gene
 RESPOND WITH JSON ONLY. No other text is needed
 '''
 
-prompt3 = ''' content:
-
-Features of a Monopoly Market 
-Some characteristics of a monopoly market are as follows.
-
-The product has only one seller in the market.
-
-Monopolies possess information that is unknown to others in the market.
-
-There are profit maximization and price discrimination associated with monopolistic markets. Monopolists are guided by the need to maximize profit either by expanding sales production or by raising the price.
-
-It has high barriers to entry for any new firm that produces the same product.
-
-The monopolist is the price maker, i.e., it decides the price, which maximizes its profit. The price is determined by evaluating the demand for the product.
-
-The monopolist does not discriminate among customers and charges them all alike for the same product.
-
-Some of the monopoly market examples are your local gas company, railways, Facebook, Google, Patents, etc.
-
-
-'''
-
-response = model.generate_content(prompt1 + prompt3)
-print(response.text)
-response = model.generate_content(prompt2 + response.text)
-print(type(response.text))
-json_content = re.search(r'\{.*\}', response.text, re.DOTALL).group(0)
-
-print(json_content)
-d = json.loads(json_content) 
-print(d)
-# to_markdown(response.text)
-
-
-
-def content_generation(user_input):
+def gemni_visualize(user_input):
   user_input = "user input : "+ user_input
 
-  response = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
-      messages=[
-              {"role": "system", "content": prompt},
-              {"role": "user", "content": user_input},
-          ]
-  )
-
-# print(response["choices"][0]["message"]["content"])
-
-  d = json.loads(response["choices"][0]["message"]["content"]) 
+  response = model.generate_content(prompt1 + user_input)
+  response = model.generate_content(prompt2 + response.text)
+  json_content = re.search(r'\{.*\}', response.text, re.DOTALL).group(0)
+  d = json.loads(json_content) 
   print(d)
 
   return d
