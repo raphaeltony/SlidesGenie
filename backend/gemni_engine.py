@@ -6,10 +6,10 @@ import os
 # import textwrap
 import json
 import re
+from dotenv import load_dotenv
 
-
-gemini_api_key = 'AIzaSyDAC1T59jvKl6qw4JJhyyco8Y6et_hQ8E4'
-genai.configure(api_key = gemini_api_key)
+load_dotenv()
+genai.configure(api_key = os.getenv("GEMINI_API"))
 
 # def to_markdown(text):
 #   text = text.replace('•', '  *')
