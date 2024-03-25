@@ -1,10 +1,9 @@
-import openai
+from openai import OpenAI
 import json
 from dotenv import load_dotenv
 import os
 from backend.prompt_examples import user_inputs,assistant_answers
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API")
 
 prompt1 ='''You are an AI called MemoryLane. You help people to remember study material by using mnemonic images that use vivid strange imagery.  Consider the following user input.
 Identify the main topic and generate short keywords related to that topic from the input. 
@@ -52,33 +51,36 @@ The above JSON contains two slide templates: title, image-text. Use this to gene
 def visualize(user_input):
     user_input = "user input : "+ user_input
 
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
+    client = OpenAI(api_key=os.getenv("OPENAI_API"))
+
+    response = client.chat.completions.create(
+      model="gpt-4-0125-preview",
+      messages=[
                 {"role": "system", "content": prompt1},
-                {"role": "user", "content": user_inputs[0]},
-                {"role": "assistant", "content": assistant_answers[0]},
-                {"role": "user", "content": user_inputs[1]},
-                {"role": "assistant", "content": assistant_answers[1]},
-                {"role": "user", "content": user_inputs[2]},
-                {"role": "assistant", "content": assistant_answers[2]},
+                # {"role": "user", "content": user_inputs[0]},
+                # {"role": "assistant", "content": assistant_answers[0]},
+                # {"role": "user", "content": user_inputs[1]},
+                # {"role": "assistant", "content": assistant_answers[1]},
+                # {"role": "user", "content": user_inputs[2]},
+                # {"role": "assistant", "content": assistant_answers[2]},
 
                 {"role": "user", "content": user_input},
             ]
     )
 
-    content = "content: "+ str(response["choices"][0]["message"]["content"])
+    content = "content: "+ str(response.choices[0].message.content)
+    print(content)
 
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
+    # gpt-4-0125-preview
+    response = client.chat.completions.create(
+      model="gpt-3.5-turbo",
+      messages=[
                 {"role": "system", "content": prompt2},
                 {"role": "user", "content": content},
             ]
     )
 
-
-    d = json.loads(response["choices"][0]["message"]["content"]) 
+    d = json.loads(response.choices[0].message.content) 
     print(d)
 
     return d
