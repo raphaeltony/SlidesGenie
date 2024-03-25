@@ -4,7 +4,8 @@ from IPython.display import display
 from IPython.display import Markdown
 import pathlib
 import textwrap
-
+import json
+import re
 
 
 gemini_api_key = 'AIzaSyDAC1T59jvKl6qw4JJhyyco8Y6et_hQ8E4'
@@ -56,8 +57,8 @@ Template:
 }
 
 ```
-The above JSON contains two slide templates: title, image-text. Use this to generate the slides for each keyword and nest the required details accurately. For each keyword, use the image-text slide and generate the response. RESPOND WITH JSON ONLY
-
+The above JSON contains two slide templates: title, image-text. Use this to generate the slides for each keyword and nest the required details accurately. For each keyword, use the image-text slide and generate the response. 
+RESPOND WITH JSON ONLY. No other text is needed
 '''
 
 prompt3 = ''' content:
@@ -85,25 +86,31 @@ Some of the monopoly market examples are your local gas company, railways, Faceb
 response = model.generate_content(prompt1 + prompt3)
 print(response.text)
 response = model.generate_content(prompt2 + response.text)
-print(response.text)
+print(type(response.text))
+json_content = re.search(r'\{.*\}', response.text, re.DOTALL).group(0)
 
+print(json_content)
+d = json.loads(json_content) 
+print(d)
 # to_markdown(response.text)
 
 
 
 def content_generation(user_input):
-    user_input = "user input : "+ user_input
+  user_input = "user input : "+ user_input
 
-    response = model.generate_content(prompt1 + user_input)
-    response = model.generate_content(prompt2 + response.text)
-    print(response.text)
-
-
+  response = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages=[
+              {"role": "system", "content": prompt},
+              {"role": "user", "content": user_input},
+          ]
+  )
 
 # print(response["choices"][0]["message"]["content"])
 
-    d = json.loads(response["choices"][0]["message"]["content"]) 
-    print(d)
+  d = json.loads(response["choices"][0]["message"]["content"]) 
+  print(d)
 
-    return d
+  return d
   
