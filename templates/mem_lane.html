@@ -131,28 +131,32 @@
       <p class="lead">Tell us the facts. We will weave a story out of it. Learn fast. Click submit to see the magic.</p>
 
 
-      <form>
-        <div class="mb-3">
-          <textarea placeholder="Enter your topic" class="form-control form-control-lg" id="message"
-            rows="10" name="userInput" required></textarea>
-        </div>
-
-        <!-- <div class="mb-3">
-          <label for="formFile" class="form-label">Upload Certificate</label>
-          <input class="form-control" type="file" id="formFile" placeholder="" value="" required>
-          <div class="invalid-feedback">
-            Please upload a certificate.
+      <div>
+        <form>
+          <div class="mb-3">
+            <textarea placeholder="Enter your topic" class="form-control form-control-lg" id="message"
+              rows="10" name="userInput" required></textarea>
           </div>
-        </div> -->
-       
+  
+          <!-- <div class="mb-3">
+            <label for="formFile" class="form-label">Upload Certificate</label>
+            <input class="form-control" type="file" id="formFile" placeholder="" value="" required>
+            <div class="invalid-feedback">
+              Please upload a certificate.
+            </div>
+          </div> -->
+         
+  
+          <button type="submit" id="submitButton" class="btn btn-lg btn-light fw-bold border-white bg-white">Submit</button>
+        </form>
+      </div>
 
-        <button type="submit" id="submitButton" class="btn btn-lg btn-light fw-bold border-white bg-white">Submit</button>
-      </form>
-
-      <form action = "/uploader" method = "post" enctype="multipart/form-data">   
-        <input type="file" name="file" />   
-        <input type = "submit" value="Upload">   
-      </form>  
+      <div class="p-3">
+        <form action = "/uploader" method = "post" enctype="multipart/form-data">   
+          <input type="file" name="file" />   
+          <button class="btn bg-white" type = "submit" value="Upload">Upload</button>
+        </form>
+      </div>  
 
       <div class="progress mt-3 d-none" id="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100">
         <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar" style="width: 3%"></div>
