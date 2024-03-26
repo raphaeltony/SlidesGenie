@@ -5,6 +5,8 @@ from backend.GPT_engine import content_generation
 from backend.memory_lane import visualize
 from backend.gemni_engine import gemni_visualize
 from backend.slides_creation import create_title_slide,create_left_image_slide,create_right_image_slide, create_title_sub_text_slide,create_image_slide
+from backend.text_recognize import get_text
+
 app = Flask(__name__)
 
 
@@ -42,8 +44,12 @@ def process_submit():
         source = request.headers["Referer"].split('/')[-1] #Getting from which the submit request came
         if(str(source) == 'slidesgenie'):
             new_presentation_id += slides_genie(form_data['userInput'],form_data['styleSelect'])
-        elif(str(source) == 'memorylane'):
-            new_presentation_id += memory_lane(form_data['userInput'],form_data['llm'],form_data['imageModel'])
+        elif(str(source) == 'memorylane' or str(source) == 'uploader'):
+            if(form_data['userInput'] == ""):
+                user_input = get_text('new.jpg')
+                new_presentation_id += memory_lane(user_input, form_data['llm'],form_data['imageModel'])
+            else:
+                new_presentation_id += memory_lane(form_data['userInput'],form_data['llm'],form_data['imageModel'])
         else:
             return "Something went wrong"
     return f"https://docs.google.com/presentation/d/{new_presentation_id}"
@@ -119,4 +125,9 @@ def slides_genie(user_input,slideStyle):
 
 
 
-
+@app.route('/uploader', methods=['GET', 'POST'])
+def upload_file():   
+    if request.method == 'POST':   
+        f = request.files['file'] 
+        f.save("new.jpg")   
+    return render_template("mem_lane.html")

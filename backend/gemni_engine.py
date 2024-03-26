@@ -65,7 +65,9 @@ def gemni_visualize(user_input):
   user_input = "user input : "+ user_input
 
   response = model.generate_content(prompt1 + user_input)
+  print(response.text)
   response = model.generate_content(prompt2 + response.text)
+  print(response.text)
   json_content = re.search(r'\{.*\}', response.text, re.DOTALL).group(0)
   d = json.loads(json_content) 
   print("USING GEMINI")

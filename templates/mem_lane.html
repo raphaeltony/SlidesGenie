@@ -131,21 +131,13 @@
       <p class="lead">Tell us the facts. We will weave a story out of it. Learn fast. Click submit to see the magic.</p>
 
 
-      <form>
-        <div class="mb-3">
-          <textarea placeholder="Enter your topic" class="form-control form-control-lg" id="message"
-            rows="10" name="userInput" required></textarea>
-        </div>
+      <div>
+        <form>
+          <div class="mb-3">
+            <textarea placeholder="Enter your topic" class="form-control form-control-lg" id="message"
+              rows="10" name="userInput" required></textarea>
+          </div>
 
-        <!-- <div class="col-12">
-          <label for="level-select" class="form-label">Level</label>
-          <select class="form-select" name="llm" id="llm"  required>
-            <option value="">Choose...</option>
-            <option value="1">GPT-3.5</option>
-            <option value="2">GPT-4</option>
-            <option value="3">Gemini</option>
-          </select>
-        </div> -->
         <h2>Choose your LLM</h2>
         <div class="row my-2 p-2">
           <div class="col-4 ">
@@ -186,10 +178,17 @@
           </div>
 
         </div>
+  
+          <button type="submit" id="submitButton" class="btn btn-lg btn-light fw-bold border-white bg-white">Submit</button>
+        </form>
+      </div>
 
-
-        <button type="submit" id="submitButton" class="btn btn-lg btn-light fw-bold border-white bg-white">Submit</button>
-      </form>
+      <div class="p-3">
+        <form action = "/uploader" method = "post" enctype="multipart/form-data">   
+          <input type="file" name="file" />   
+          <button class="btn bg-white" type = "submit" value="Upload">Upload</button>
+        </form>
+      </div>  
 
       <div class="progress mt-3 d-none" id="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100">
         <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar" style="width: 3%"></div>
