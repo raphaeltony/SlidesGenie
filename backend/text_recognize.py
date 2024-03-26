@@ -10,7 +10,7 @@ def get_text(FILEPATH):
     img = Image.open(FILEPATH)
     pytesseract.tesseract_cmd = TESSERACTPATH
     text = pytesseract.image_to_string(img)
-    print(text)
+    print("Extracted text : ", text)
     return text
 
 

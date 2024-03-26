@@ -15,7 +15,6 @@ app = Flask(__name__)
 # band rep# resents a different price level, symbolizing how they extract more money from customers based on their willingness or ability to pay.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'High Barriers to Entry', 'visual': 'Envision a large impenetrable wall surrounding the market, guarded by dragons and mountains. It seems impossible for any new firm to enter and compete with the monopolist.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Price Maker', 'visual': 'Picture the monopolist holding a giant gavel, ready to hammer down the price of the product. They possess the ultimate power to dictate the value of their goods, transcending any interference from the market or competitors.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Demand', 'visual': "See a crowd of people, each holding a sign representing their desire for the monopolist's product. The monopolist uses a magnifying glass to selectively analyze each person's demand, measuring their willingness to pay and determining the price accordingly."}}, {'type_id': 'image-text', 'inputs': {'keyword': 'No Discrimination', 'visual': 'Imagine the monopolist standing on a stage, surrounded by a diverse audience of individuals. The monopolist wears a blindfold, representing their refusal to differentiate between customers based on any factors. All customers are treated equally, paying the same price for the same product.'}}]} 
 
 time = 0
-file_uploaded = False
 
 SLIDE_DARK="1Qw0oqIpGSrEyQZkFhFnzxj6-4kMq8X1TnSdqpG94Ch8"
 SLIDE_PROF="159B-JLzNz0rWHMHYbQFdfitqoqObyxrMfj-RtEXG91M"
@@ -32,7 +31,6 @@ def get_slides_genie():
 
 @app.route("/memorylane")
 def get_mem_lane():
-    file_uploaded = False
     return render_template("mem_lane.html")
 
 #common submit endpoint for both slidesgenie and memorylane
@@ -45,7 +43,7 @@ def process_submit():
         if(str(source) == 'slidesgenie'):
             new_presentation_id += slides_genie(form_data['userInput'],form_data['styleSelect'])
         elif(str(source) == 'memorylane' or str(source) == 'uploader'):
-            if(file_uploaded):
+            if(form_data['userInput'] == ""):
                 user_input = get_text('new.jpg')
                 new_presentation_id += memory_lane(user_input)
             else:
@@ -127,5 +125,4 @@ def upload_file():
     if request.method == 'POST':   
         f = request.files['file'] 
         f.save("new.jpg")   
-        file_uploaded = True
     return render_template("mem_lane.html")
