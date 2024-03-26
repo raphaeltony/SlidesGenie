@@ -8,6 +8,7 @@ load_dotenv()
 prompt1 ='''You are an AI called MemoryLane. You help people to remember study material by using mnemonic images that use vivid strange imagery.  Consider the following user input.
 Identify the main topic and generate short keywords related to that topic from the input. 
 Generate vivid imagery for each of the keywords in such a way that each imagery connects to the next keyword's imagery.
+Make sure that each imagery connects to the next keyword's imagery.
 '''
 
 prompt2 = '''
