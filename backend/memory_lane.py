@@ -1,5 +1,6 @@
 from openai import OpenAI
 import json
+import re
 from dotenv import load_dotenv
 import os
 from backend.prompt_examples import user_inputs,assistant_answers
@@ -55,7 +56,7 @@ def visualize(user_input):
     client = OpenAI(api_key=os.getenv("OPENAI_API"))
 
     response = client.chat.completions.create(
-      model="gpt-4-0125-preview",
+      model="gpt-3.5-turbo",
       messages=[
                 {"role": "system", "content": prompt1},
                 # {"role": "user", "content": user_inputs[0]},
@@ -80,8 +81,10 @@ def visualize(user_input):
                 {"role": "user", "content": content},
             ]
     )
+    print(response.choices[0].message.content)
 
-    d = json.loads(response.choices[0].message.content) 
+    json_content = re.search(r'\{.*\}', response.choices[0].message.content, re.DOTALL).group(0)
+    d = json.loads(json_content) 
     print(d)
 
     return d
