@@ -1,10 +1,9 @@
-import openai
+from openai import OpenAI
 import json
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API")
 
 prompt = ''' Imagine you are an AI Slides generating tool called 'SlidesGenie'. Based on the input of the user, create the structure of the slides presentation as a JSON object.
 You have 4 slide formats at your disposal to use. Each slide has a type_id and takes different inputs. Slides with images have a special input called image_prompt. This should be a description of an image that can be generated using a text-to-image model. The description should match with the contents of the slide. The slide formats are:
@@ -67,20 +66,23 @@ The above JSON contains a list of the 4 slide templates: title, left-image-text,
 RESPOND WITH JSON ONLY
 
 '''
+
 def content_generation(user_input):
   user_input = "user input : "+ user_input
 
-  response = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
-      messages=[
-              {"role": "system", "content": prompt},
-              {"role": "user", "content": user_input},
-          ]
+  client = OpenAI(api_key=os.getenv("OPENAI_API"))
+  response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": user_input},
+    ]
   )
 
-# print(response["choices"][0]["message"]["content"])
 
-  d = json.loads(response["choices"][0]["message"]["content"]) 
+# print(response.choices[0].message.content)
+
+  d = json.loads(response.choices[0].message.content) 
   print(d)
 
   return d
