@@ -50,9 +50,7 @@ The above JSON contains two slide templates: title, image-text. Use this to gene
 '''
 
 
-def visualize(user_input,llm):
-    
-    
+def visualize(user_input,llm):  
     gpt_model = ''
     example_messages = []
 
@@ -84,8 +82,8 @@ def visualize(user_input,llm):
       model=gpt_model,
       messages=example_messages
     )
-
     content = "content: "+ str(response.choices[0].message.content)
+    print("USING ", gpt_model)
     print(content)
 
 
