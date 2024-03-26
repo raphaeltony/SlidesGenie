@@ -136,6 +136,58 @@
           <textarea placeholder="Enter your topic" class="form-control form-control-lg" id="message"
             rows="10" name="userInput" required></textarea>
         </div>
+
+        <!-- <div class="col-12">
+          <label for="level-select" class="form-label">Level</label>
+          <select class="form-select" name="llm" id="llm"  required>
+            <option value="">Choose...</option>
+            <option value="1">GPT-3.5</option>
+            <option value="2">GPT-4</option>
+            <option value="3">Gemini</option>
+          </select>
+        </div> -->
+        <h2>Choose your llm</h2>
+        <div class="row my-2 p-2">
+          <div class="col-4 ">
+            <div class="row form-check justify-content-center">
+              <input type="radio" class="btn-check" name="llm" id="radio1" value="1"
+                autocomplete="off" checked>
+              <label class="btn btn-outline-secondary" for="radio1">GPT-3.5</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row form-check justify-content-center">
+              <input type="radio" class="btn-check" name="llm" id="radio2" value="2" autocomplete="off">
+              <label class="btn btn-outline-secondary" for="radio2">GPT-4</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row form-check justify-content-center">
+              <input type="radio" class="btn-check" name="llm" id="radio3" value="3" autocomplete="off">
+              <label class="btn btn-outline-secondary" for="radio3">Gemini</label>
+            </div>
+          </div>
+        </div>
+
+        <h2>Choose your image engine</h2>
+        <div class="row my-2 p-2">
+          <div class="col-4 ">
+            <div class="row form-check justify-content-center">
+              <input type="radio" class="btn-check" name="imageModel" id="radio4" value="1"
+                autocomplete="off" checked>
+              <label class="btn btn-outline-secondary" for="radio4">DALLE-2</label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row form-check justify-content-center">
+              <input type="radio" class="btn-check" name="imageModel" id="radio5" value="2" autocomplete="off">
+              <label class="btn btn-outline-secondary" for="radio5">DALLE-3</label>
+            </div>
+          </div>
+
+        </div>
+
+
         <button type="submit" id="submitButton" class="btn btn-lg btn-light fw-bold border-white bg-white">Submit</button>
       </form>
 

@@ -37,13 +37,15 @@ def process_submit():
     new_presentation_id=""
     if request.method == 'POST':
         form_data = dict(request.form)
+        print(form_data)
+        print("form is " + form_data['llm'])
         source = request.headers["Referer"].split('/')[-1] #Getting from which the submit request came
-        if(str(source) == 'slidesgenie'):
-            new_presentation_id += slides_genie(form_data['userInput'],form_data['styleSelect'])
-        elif(str(source) == 'memorylane'):
-            new_presentation_id += memory_lane(form_data['userInput'])
-        else:
-            return "Something went wrong"
+        # if(str(source) == 'slidesgenie'):
+        #     new_presentation_id += slides_genie(form_data['userInput'],form_data['styleSelect'])
+        # elif(str(source) == 'memorylane'):
+        #     new_presentation_id += memory_lane(form_data['userInput'])
+        # else:
+        return "Something went wrong"
     return f"https://docs.google.com/presentation/d/{new_presentation_id}"
 
 def memory_lane(user_input):

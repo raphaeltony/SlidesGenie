@@ -22,9 +22,15 @@ function submit_request() {
     event.preventDefault()
     const userInput = document.getElementById("message").value;
     let styleSelect = "";
+    let llm = "";   
+    let imageModel= "";
+
     if(currentPage=='slidesgenie')
         styleSelect = document.querySelector('input[name="styleSelect"]:checked').value;
 
+    if(currentPage=='memorylane')
+        llm = document.querySelector('input[name="llm"]:checked').value;
+        imageModel = document.querySelector('input[name="imageModel"]:checked').value;
     // console.log(eventname,instname,startdate,enddate,prize,level,cashprize)
 
     var formdata = new FormData();
@@ -32,6 +38,11 @@ function submit_request() {
     if(currentPage=='slidesgenie')
         formdata.append("styleSelect", styleSelect);
 
+    if(currentPage=='memorylane')
+        formdata.append("llm", llm);
+        formdata.append("imageModel",imageModel);
+
+    
     var requestOptions = {
         method: "POST",
         body: formdata,
