@@ -5,6 +5,8 @@ from backend.GPT_engine import content_generation
 from backend.memory_lane import visualize
 from backend.gemni_engine import gemni_visualize
 from backend.slides_creation import create_title_slide,create_left_image_slide,create_right_image_slide, create_title_sub_text_slide,create_image_slide
+from backend.text_recognize import get_text
+
 app = Flask(__name__)
 
 
@@ -114,4 +116,13 @@ def slides_genie(user_input,slideStyle):
 
 
 
-
+@app.route('/uploader', methods=['GET', 'POST'])
+def upload_file():   
+    # if request.method == 'POST':   
+    #     f = request.files['file'] 
+    #     f.save("new.jpg")   
+    #     img = Image.open('new.jpg')
+    #     pytesseract.tesseract_cmd = TESSERACTPATH
+    #     text = pytesseract.image_to_string(img)
+    #     print(text)
+    return render_template("mem_lane.html")
