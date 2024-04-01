@@ -47,9 +47,11 @@ def process_submit():
         elif(str(source) == 'memorylane' or str(source) == 'uploader'):
             if(form_data['userInput'] == ""):
                 user_input = get_text('new.jpg')
+
                 new_presentation_id += memory_lane(user_input, form_data['llm'],form_data['imageModel'])
             else:
                 new_presentation_id += memory_lane(form_data['userInput'],form_data['llm'],form_data['imageModel'])
+
         else:
             return "Something went wrong"
     return f"https://docs.google.com/presentation/d/{new_presentation_id}"
