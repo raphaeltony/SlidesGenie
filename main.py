@@ -39,26 +39,33 @@ def process_submit():
     new_presentation_id=""
     if request.method == 'POST':
         form_data = dict(request.form)
+        print(form_data)
+        print("form is " + form_data['llm'])
         source = request.headers["Referer"].split('/')[-1] #Getting from which the submit request came
         if(str(source) == 'slidesgenie'):
             new_presentation_id += slides_genie(form_data['userInput'],form_data['styleSelect'])
         elif(str(source) == 'memorylane' or str(source) == 'uploader'):
             if(form_data['userInput'] == ""):
                 user_input = get_text('new.jpg')
-                new_presentation_id += memory_lane(user_input)
+
+                new_presentation_id += memory_lane(user_input, form_data['llm'],form_data['imageModel'])
             else:
-                new_presentation_id += memory_lane(form_data['userInput'])
+                new_presentation_id += memory_lane(form_data['userInput'],form_data['llm'],form_data['imageModel'])
+
         else:
             return "Something went wrong"
     return f"https://docs.google.com/presentation/d/{new_presentation_id}"
 
-def memory_lane(user_input):
+def memory_lane(user_input,llm,imageModel):
     # response = {'slides': [{'type_id': 'title', 'inputs': {'title': 'Features of a Monopoly Market'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Monopoly Market', 'visual': 'Imagine a bustling marketplace, but with a single vendor standing alone in the center, surrounded by empty stalls. The market is dominated by this solitary figure.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'One Seller', 'visual': "Visualize this seller as \
     # a giant towering over the rest of the market, holding a sign that reads 'Only I can sell!' The other vendors cower in fear and submission."}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Unknown Information', 'visual': 'Picture the monopolist wearing a cloak of shadows, whispering secrets to themselves. They hold hidden knowledge that gives them a mysterious advantage over the others.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Profit Maximization', 'visual': 'See the monopolist transforming into a money-hungry monster, with coins spouting from their greedy mouth. They have an insatiable desire for wealth and are willing to devour everything in their path to achieve maximum profit.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Price Discrimination', 'visual': 'Imagine the monopolist wearing a hat with different colored bands. Each \
     # band represents a different price level, symbolizing how they extract more money from customers based on their willingness or ability to pay.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'High Barriers to Entry', 'visual': 'Envision a large impenetrable wall surrounding the market, guarded by dragons and mountains. It seems impossible for any new firm to enter and compete with the monopolist.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Price Maker', 'visual': 'Picture the monopolist holding a giant gavel, ready to hammer down the price of the product. They possess the ultimate power to dictate the value of their goods, transcending any interference from the market or competitors.'}}, {'type_id': 'image-text', 'inputs': {'keyword': 'Demand', 'visual': "See a crowd of people, each holding a sign representing their desire for the monopolist's product. The monopolist uses a magnifying glass to selectively analyze each person's demand, measuring their willingness to pay and determining the price accordingly."}}, {'type_id': 'image-text', 'inputs': {'keyword': 'No Discrimination', 'visual': 'Imagine the monopolist standing on a stage, surrounded by a diverse audience of individuals. The monopolist wears a blindfold, representing their refusal to differentiate between customers based on any factors. All customers are treated equally, paying the same price for the same product.'}}]} 
-
-    # response = visualize(user_input)
-    response = gemni_visualize(user_input)
+    response=None
+    if(llm=="3"):
+        response = gemni_visualize(user_input)
+    else:
+        response = visualize(user_input,llm)
+        
 
     new_presentation_id = copy_presentation("1oBjYbkCRWQwhOiNC4hHTMsuwIaURzPQvpYjXm2QVYLM",response['slides'][0]['inputs']['title'])
     new_slides = get_presentation(new_presentation_id)
@@ -72,7 +79,7 @@ def memory_lane(user_input):
             create_title_slide(new_presentation_id,slide['inputs'],counter)
 
         elif(slide['type_id'] == 'image-text'):
-            create_image_slide(new_presentation_id,slide['inputs'], counter)
+            create_image_slide(new_presentation_id,slide['inputs'], counter, imageModel)
 
         counter = counter + 1
     delete_template_slides(new_presentation_id,new_slides)

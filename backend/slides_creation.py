@@ -4,7 +4,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from backend.connection import get_drive_service
 from backend.connection import get_slides_service
-from backend.image_engine import image_generation
+from backend.image_engine import image_generation, image_generation_for_memlane
 
 #Connecting to the drive service
 drive_service = get_drive_service()
@@ -178,7 +178,7 @@ def create_title_sub_text_slide(presentation_id, content,counter):
         presentationId=presentation_id, body=body).execute()
 
 
-def create_image_slide(presentation_id, content,counter):
+def create_image_slide(presentation_id, content,counter, imageModel):
     requests = [
             {
                 'replaceAllText': {
@@ -204,7 +204,7 @@ def create_image_slide(presentation_id, content,counter):
 
             {
                 'replaceAllShapesWithImage': {
-                    'imageUrl': image_generation(content['visual']),
+                    'imageUrl': image_generation_for_memlane(content['visual'], imageModel),
                     'replaceMethod': 'CENTER_INSIDE',
                     'containsText': {
                         'text': '<<image-text_image>>',

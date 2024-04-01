@@ -70,6 +70,7 @@ def gemni_visualize(user_input):
   print(response.text)
   json_content = re.search(r'\{.*\}', response.text, re.DOTALL).group(0)
   d = json.loads(json_content) 
+  print("USING GEMINI")
   print(d)
 
   return d

@@ -50,32 +50,46 @@ The above JSON contains two slide templates: title, image-text. Use this to gene
 '''
 
 
-def visualize(user_input):
+def visualize(user_input,llm):  
+    gpt_model = ''
+    example_messages = []
+
+
+    if(llm == '1'):
+      gpt_model = 'gpt-3.5-turbo'
+      example_messages=[
+                {"role": "system", "content": prompt1},
+                {"role": "user", "content": user_inputs[0]},
+                {"role": "assistant", "content": assistant_answers[0]},
+                {"role": "user", "content": user_inputs[1]},
+                {"role": "assistant", "content": assistant_answers[1]},
+                {"role": "user", "content": user_inputs[2]},
+                {"role": "assistant", "content": assistant_answers[2]},
+                {"role": "user", "content": user_input},
+            ]
+    else:
+      gpt_model = 'gpt-4-0125-preview'
+      example_messages=[
+                {"role": "system", "content": prompt1},
+                {"role": "user", "content": user_input},
+            ]
+    
     user_input = "user input : "+ user_input
 
     client = OpenAI(api_key=os.getenv("OPENAI_API"))
 
     response = client.chat.completions.create(
-      model="gpt-3.5-turbo",
-      messages=[
-                {"role": "system", "content": prompt1},
-                # {"role": "user", "content": user_inputs[0]},
-                # {"role": "assistant", "content": assistant_answers[0]},
-                # {"role": "user", "content": user_inputs[1]},
-                # {"role": "assistant", "content": assistant_answers[1]},
-                # {"role": "user", "content": user_inputs[2]},
-                # {"role": "assistant", "content": assistant_answers[2]},
-
-                {"role": "user", "content": user_input},
-            ]
+      model=gpt_model,
+      messages=example_messages
     )
-
     content = "content: "+ str(response.choices[0].message.content)
+    print("USING ", gpt_model)
     print(content)
+
 
     # gpt-4-0125-preview
     response = client.chat.completions.create(
-      model="gpt-3.5-turbo",
+      model=gpt_model,
       messages=[
                 {"role": "system", "content": prompt2},
                 {"role": "user", "content": content},
